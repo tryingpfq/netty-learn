@@ -9,6 +9,7 @@ import io.netty.util.CharsetUtil;
 
 //业务逻辑处理
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
+    //每个信息入站都会调用
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf in = (ByteBuf) msg;
@@ -18,6 +19,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     }
 
+    //通知处理器最后的channelread是当前批处理中的最后一条信息调用
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         //将未决消息冲刷到远程节点，并关闭该Channel
